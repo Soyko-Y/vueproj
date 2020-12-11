@@ -1,6 +1,6 @@
 <template>
   <main>
-    <News
+    <NewsArticle
       v-for="news in newsList"
       :key="news.id"
       v-bind:news="news"
@@ -11,11 +11,11 @@
 </template>
 
 <script>
-import News from "@/components/News";
+import NewsArticle from "@/components/NewsArticle";
 export default {
   props: ["newsList"],
   components: {
-    News
+    NewsArticle
   },
   methods: {
     showNews(id) {

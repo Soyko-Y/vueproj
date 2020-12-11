@@ -1,52 +1,11 @@
 <template>
-  <h1>News</h1>
-  <AddNews
-    @news-submitted="addNews"
-  />
-  <NewsList
-    :newsList="newsList"
-    @show-news="showNews"
-    @delete-news="deleteNews"
-  />
+  <div id="nav">
+    <h1>My app</h1>
+    <router-link to="/">Home</router-link> |
+    <router-link to="/news">News</router-link>
+    <router-view />
+  </div>
 </template>
-
-<script>
-import NewsList from "@/components/NewsList";
-import AddNews from "@/components/AddNews";
-export default {
-  name: "App",
-  data() {
-    return {
-      newsList: []
-    };
-  },
-  components: {
-    NewsList,
-    AddNews
-  },
-  mounted() {
-    fetch('https://jsonplaceholder.typicode.com/posts?_limit=3')
-    .then(response => response.json())
-    .then(json => {
-      this.newsList = json
-    });
-  },
-
-  methods: {
-    showNews(id) {
-      this.newsList.find(news => news.id === id).isViewed = true;
-    },
-
-    deleteNews(id) {
-      this.newsList = this.newsList.filter(news => news.id !== id);
-    },
-
-    addNews(news) {
-      this.newsList.unshift(news);
-    }
-  }
-};
-</script>
 
 <style>
 #app {
@@ -58,10 +17,12 @@ export default {
   margin-top: 60px;
 }
 body {
-  font: 62.5%/1.5  "Lucida Grande", "Lucida Sans", Tahoma, Verdana, sans-serif; 
+  font: 62.5%/1.5 "Lucida Grande", "Lucida Sans", Tahoma, Verdana, sans-serif;
 }
 
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -72,7 +33,7 @@ h1 {
 }
 
 h2 {
-  font-size: 2.0rem;
+  font-size: 2rem;
 }
 
 h3 {
