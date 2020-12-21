@@ -2,10 +2,10 @@
   <section :class="{ viewed: news.isViewed }">
     <h3>{{ news.title }}</h3>
     <p>{{ news.body }}</p>
-    <button class="button" v-on:click="$emit('show-news', news.id)">
+    <button class="button" @click="$emit('show', news.id)">
       Show news
     </button>
-    <button class="button" v-on:click="$emit('delete-news', news.id)">
+    <button class="button" @click="$emit('delete', news.id)">
       Delete news
     </button>
   </section>

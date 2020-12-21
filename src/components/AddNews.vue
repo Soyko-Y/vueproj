@@ -1,40 +1,26 @@
 <template>
   <section>
     <h2>Add news</h2>
-    <form @submit.prevent="onSubmit">
+    <form @submit.prevent="submit">
       <label for="title">News Title:</label>
-      <input id="title" v-model="title" />
+      <input id="title" v-model="form.title" />
       <label for="body">Content:</label>
-      <textarea id="body" v-model="body" />
-      <button type="submit" class="button">Save News</button>
+      <textarea id="body" v-model="form.body" />
+      <button type="submit" :disabled="!valid" class="button">Save News</button>
     </form>
   </section>
 </template>
 
 <script>
+import { useForm } from "../compositions/form"
 export default {
-  data() {
-    return {
-      title: "",
-      body: ""
-    };
+  props: {
+    onAdd: Function
   },
 
-  methods: {
-    onSubmit() {
-      if (!this.title.trim() || !this.body.trim()) return;
-
-      let news = {
-        id: Date.now(),
-        title: this.title,
-        body: this.body,
-        isViewed: false
-      };
-
-      this.$emit("news-submitted", news);
-
-      this.title = "";
-      this.body = "";
+  setup(props) {
+    return {
+      ...useForm(props)
     }
   }
 };
