@@ -1,23 +1,21 @@
 <template>
-  <section>
-    <AddNews :onAdd="addNews" />
+  <AddNews :onAdd="addNews" />
 
-    <select v-model="filter">
-      <option value="all">All</option>
-      <option value="viewed">Viewed</option>
-      <option value="not-viewed">Not viewed</option>
-    </select>
-    <Loader v-if="loading" />
-    <NewsArticle
-      v-else-if="newsList.length"
-      v-for="news in newsList"
-      :key="news.id"
-      :news="news"
-      @show="showNews"
-      @delete="deleteNews"
-    />
-    <p v-else>No news!</p>
-  </section>
+  <select v-model="filter">
+    <option value="all">All</option>
+    <option value="viewed">Viewed</option>
+    <option value="not-viewed">Not viewed</option>
+  </select>
+  <Loader v-if="loading" />
+  <NewsArticle
+    v-else-if="newsList.length"
+    v-for="news in newsList"
+    :key="news.id"
+    :news="news"
+    @show="showNews"
+    @delete="deleteNews"
+  />
+  <p v-else>No news!</p>
 </template>
 
 <script>

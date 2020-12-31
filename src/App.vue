@@ -1,10 +1,11 @@
 <template>
-  <div id="nav">
-    <h1>My app</h1>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/news">News</router-link>
-    <router-view />
-  </div>
+  <nav class="navbar">
+    <router-link class="nav-link" to="/">Home</router-link>
+    <router-link class="nav-link" to="/news">Vue news</router-link>
+    <router-link class="nav-link" to="/stencil">Stencil news</router-link>
+  </nav>
+
+  <router-view />
 </template>
 
 <style>
@@ -14,7 +15,6 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 body {
   font: 62.5%/1.5 "Lucida Grande", "Lucida Sans", Tahoma, Verdana, sans-serif;
@@ -57,4 +57,33 @@ section {
   border-radius: 1rem;
   margin: 1rem;
 }
+
+.navbar {
+  background: linear-gradient(#5476d6, #5497d6);
+  height: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.nav-link {
+  font-size: 1.2rem;
+  text-decoration: none;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  height: 100%;
+}
+
+.nav-link:hover {
+  border-bottom: 4px solid #fff;
+  transition: all 0.2s ease-out;
+}
+
 </style>
