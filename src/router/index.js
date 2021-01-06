@@ -16,6 +16,11 @@ const routes = [
     path: "/stencil",
     name: "Stencil",
     component: () => import("../views/Stencil.vue")
+  },
+  {
+    path: "/newsx",
+    name: "Newsx",
+    component: () => import("../views/Newsx.vue")
   }
 ];
 
