@@ -8,8 +8,8 @@
   </select>
   <Loader v-if="loading" />
   <NewsArticle
-    v-else-if="newsList.length"
-    v-for="news in newsList"
+    v-else-if="filteredList.length"
+    v-for="news in filteredList"
     :key="news.id"
     :news="news"
     @show="showNews"

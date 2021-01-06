@@ -3,9 +3,12 @@
     <router-link class="nav-link" to="/">Home</router-link>
     <router-link class="nav-link" to="/news">Vue news</router-link>
     <router-link class="nav-link" to="/stencil">Stencil news</router-link>
+    <router-link class="nav-link" to="/newsx">Vuex news</router-link>
   </nav>
 
-  <router-view />
+  <main>
+    <router-view />
+  </main>
 </template>
 
 <style>
@@ -58,6 +61,11 @@ section {
   margin: 1rem;
 }
 
+main {
+  margin: 0 auto;
+  width: 70vw;
+}
+
 .navbar {
   background: linear-gradient(#5476d6, #5497d6);
   height: 5rem;
@@ -85,5 +93,4 @@ section {
   border-bottom: 4px solid #fff;
   transition: all 0.2s ease-out;
 }
-
 </style>
