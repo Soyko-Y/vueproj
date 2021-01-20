@@ -5,15 +5,13 @@ export function useNews() {
   const loading = ref(true);
   const filter = ref("all");
  
-  const fetchNews = () => {
-      fetch("https://jsonplaceholder.typicode.com/posts?_limit=3")
-      .then(response => response.json())
-      .then(json => {
-        setTimeout(() => {
-          newsList.value = json;
-          loading.value = false;
-        }, 1000);
-      });
+  const fetchNews = async (limit = 3) => {
+      const res = await fetch(
+        'https://jsonplaceholder.typicode.com/posts?_limit=' + limit
+      );
+
+      newsList.value = await res.json();
+      loading.value = false;
   }
 
   const filteredList = computed(() => {

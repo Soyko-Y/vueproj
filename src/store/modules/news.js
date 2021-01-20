@@ -36,10 +36,6 @@ const getters = {
     return state.news.filter(news => {
       return news.title && news.body;
     });
-  },
-
-  allNews(state) {
-    return state.news;
   }
 }
 

@@ -4,12 +4,12 @@ import { useStore } from "vuex";
 export function useFormx() {
   const store = useStore();
 
-    const form = reactive({
-      title: "",
-      body: ""
-    })
+  const form = reactive({
+    title: "",
+    body: ""
+  })
 
-    const submit = () => {
+  const submit = () => {
     const news = {
       id: Date.now().toString(),
       title: form.title,
