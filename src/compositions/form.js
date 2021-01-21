@@ -1,10 +1,10 @@
-import { reactive, computed } from 'vue';
+import { reactive, computed } from "vue";
 
 export function useForm(props) {
   const form = reactive({
     title: "",
     body: ""
-  })
+  });
 
   const submit = () => {
     const news = {
@@ -17,11 +17,11 @@ export function useForm(props) {
     form.title = form.body = "";
 
     props.onAdd(news);
-  }
+  };
 
   const valid = computed(() => {
-    return form.title.trim() && form.body.trim()
-  })
+    return form.title.trim() && form.body.trim();
+  });
 
-  return { form, submit, valid }
+  return { form, submit, valid };
 }
