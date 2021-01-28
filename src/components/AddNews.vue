@@ -6,22 +6,34 @@
       <input id="title" v-model="form.title" />
       <label for="body">Content:</label>
       <textarea id="body" v-model="form.body" />
-      <button type="submit" :disabled="!valid" class="button">Save News</button>
+      <button
+        type="submit"
+        :disabled="!valid"
+        class="btn btn--primary btn--medium btn--save"
+      >
+        Save News
+      </button>
     </form>
   </section>
 </template>
 
 <script>
-import { useForm } from "../compositions/form"
+import { useForm } from "../compositions/form";
 export default {
   props: {
-    onAdd: Function
+    onSave: Function,
+    news: {
+      id: Number,
+      title: String,
+      body: String,
+      isViewed: Boolean
+    }
   },
 
   setup(props) {
     return {
       ...useForm(props)
-    }
+    };
   }
 };
 </script>

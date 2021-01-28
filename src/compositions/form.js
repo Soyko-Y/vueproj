@@ -2,25 +2,27 @@ import { reactive, computed } from "vue";
 
 export function useForm(props) {
   const form = reactive({
-    title: "",
-    body: ""
+    title: props.news ? props.news.title : "" ,
+    body: props.news ? props.news.body : ""
   });
 
   const submit = () => {
     const news = {
-      id: Date.now().toString(),
+      id: props.news.id || Date.now().toString(),
       title: form.title,
       body: form.body,
-      isViewed: false
+      isViewed: props.news.isViewed || false
     };
 
     form.title = form.body = "";
 
-    props.onAdd(news);
+    props.onSave(news);
   };
 
   const valid = computed(() => {
-    return form.title.trim() && form.body.trim();
+    if(form.title && form.body)
+      return form.title.trim() && form.body.trim();
+    return false;
   });
 
   return { form, submit, valid };
