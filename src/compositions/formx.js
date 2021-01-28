@@ -1,4 +1,4 @@
-import { reactive, computed } from 'vue';
+import { reactive, computed } from "vue";
 import { useStore } from "vuex";
 
 export function useFormx() {
@@ -7,7 +7,7 @@ export function useFormx() {
   const form = reactive({
     title: "",
     body: ""
-  })
+  });
 
   const submit = () => {
     const news = {
@@ -18,12 +18,12 @@ export function useFormx() {
     };
 
     form.title = form.body = "";
-    store.commit('createNews', news);
-  }
+    store.commit("createNews", news);
+  };
 
   const valid = computed(() => {
-    return form.title.trim() && form.body.trim()
-  })
+    return form.title.trim() && form.body.trim();
+  });
 
-  return { form, submit, valid }
+  return { form, submit, valid };
 }

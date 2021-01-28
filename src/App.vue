@@ -59,6 +59,7 @@ section {
   padding: 1rem;
   border-radius: 1rem;
   margin: 1rem;
+  text-align: center;
 }
 
 main {

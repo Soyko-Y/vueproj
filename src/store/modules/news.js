@@ -3,15 +3,15 @@ const state = {
 };
 
 const actions = {
-  async fetchNews({commit}, limit = 3) {
+  async fetchNews({ commit }, limit = 3) {
     const res = await fetch(
-      'https://jsonplaceholder.typicode.com/posts?_limit=' + limit
+      "https://jsonplaceholder.typicode.com/posts?_limit=" + limit
     );
     const news = await res.json();
 
-    commit('updateNews', news)
+    commit("updateNews", news);
   }
-}
+};
 
 const mutations = {
   updateNews(state, news) {
@@ -28,8 +28,8 @@ const mutations = {
 
   showNews(state, id) {
     state.news = state.news.filter(news => news.id === id);
-  },
-}
+  }
+};
 
 const getters = {
   validNews(state) {
@@ -37,7 +37,7 @@ const getters = {
       return news.title && news.body;
     });
   }
-}
+};
 
 export default {
   state,

@@ -4,18 +4,24 @@
     <form @submit.prevent="submit">
       <input id="title" placeholder="title" v-model="form.title" />
       <textarea id="body" placeholder="body" v-model="form.body" />
-      <button type="submit" :disabled="!valid" class="button">Create News</button>
+      <button
+        type="submit"
+        :disabled="!valid"
+        class="btn btn--primary btn--medium btn--save"
+      >
+        Create News
+      </button>
     </form>
   </section>
 </template>
 
 <script>
-import { useFormx } from "../compositions/formx"
+import { useFormx } from "../compositions/formx";
 export default {
   setup() {
     return {
       ...useFormx()
-    }
+    };
   }
 };
 </script>
