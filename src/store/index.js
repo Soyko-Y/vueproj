@@ -1,5 +1,5 @@
 import { createStore } from "vuex";
-import news from './modules/news';
+import news from "./modules/news";
 
 export default createStore({
   modules: {

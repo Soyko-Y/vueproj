@@ -1,33 +1,34 @@
-import { render, fireEvent } from '@testing-library/vue'
-import '@testing-library/jest-dom'
-import AddNewsx from '../../src/components/AddNewsx.vue'
-import store from '../../src/store/modules/news'
+import { render, fireEvent } from "@testing-library/vue";
+import "@testing-library/jest-dom";
+import AddNewsx from "../../src/components/AddNewsx.vue";
+import store from "../../src/store/modules/news";
 
-describe('AddNewsx', () => {
-  it('add news', async () => {
+describe("AddNewsx", () => {
+  it("add news", async () => {
     const fakeNews = {
-      title: 'Hello',
-      body: 'World'
-    }
+      title: "Hello",
+      body: "World"
+    };
 
-    const { getByText, getByPlaceholderText } = await render(AddNewsx, {store});
-    
-    const submitButton = getByText('Create News')
-    expect(submitButton).toBeDisabled()
+    const { getByText, getByPlaceholderText } = await render(AddNewsx, {
+      store
+    });
 
-    const titleInput = getByPlaceholderText('title')
-    await fireEvent.update(titleInput, fakeNews.title)
+    const submitButton = getByText("Create News");
+    expect(submitButton).toBeDisabled();
 
-    const bodyTextarea = getByPlaceholderText('body')
-    await fireEvent.update(bodyTextarea, fakeNews.body)
+    const titleInput = getByPlaceholderText("title");
+    await fireEvent.update(titleInput, fakeNews.title);
 
-    expect(submitButton).toBeEnabled()
-    expect(submitButton).toHaveAttribute('type', 'submit')
+    const bodyTextarea = getByPlaceholderText("body");
+    await fireEvent.update(bodyTextarea, fakeNews.body);
 
-    await fireEvent.click(submitButton)
+    expect(submitButton).toBeEnabled();
+    expect(submitButton).toHaveAttribute("type", "submit");
 
-    expect(store.state.news[0].title).toBe(fakeNews.title)
-    expect(store.state.news[0].body).toBe(fakeNews.body)
+    await fireEvent.click(submitButton);
 
+    expect(store.state.news[0].title).toBe(fakeNews.title);
+    expect(store.state.news[0].body).toBe(fakeNews.body);
   });
-})
+});

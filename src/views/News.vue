@@ -1,21 +1,24 @@
 <template>
-  <AddNews :onAdd="addNews" />
+  <div class="news">
+    <AddNews :onSave="addNews" />
 
-  <select v-model="filter">
-    <option value="all">All</option>
-    <option value="viewed">Viewed</option>
-    <option value="not-viewed">Not viewed</option>
-  </select>
-  <Loader v-if="loading" />
-  <NewsArticle
-    v-else-if="filteredList.length"
-    v-for="news in filteredList"
-    :key="news.id"
-    :news="news"
-    @show="showNews"
-    @delete="deleteNews"
-  />
-  <p v-else>No news!</p>
+    <select v-model="filter">
+      <option value="all">All</option>
+      <option value="viewed">Viewed</option>
+      <option value="not-viewed">Not viewed</option>
+    </select>
+    <Loader v-if="loading" />
+    <NewsArticle
+      v-else-if="filteredNews.length"
+      v-for="news in filteredNews"
+      :key="news.id"
+      :news="news"
+      @show="showNews"
+      @edit="editNews"
+      @delete="deleteNews"
+    />
+    <p v-else>No news!</p>
+  </div>
 </template>
 
 <script>
@@ -24,6 +27,7 @@ import NewsArticle from "@/components/NewsArticle";
 import Loader from "@/components/Loader";
 import { useNews } from "../compositions/news";
 import { onMounted } from "vue";
+import { useRouter } from 'vue-router'
 export default {
   name: "News",
   components: {
@@ -33,26 +37,45 @@ export default {
   },
   setup() {
     onMounted(() => fetchNews());
+    const router = useRouter();
     const {
-      newsList,
       loading,
       filter,
       fetchNews,
-      filteredList,
-      showNews,
+      filteredNews,
       deleteNews,
-      addNews
+      addNews,
+      news,
     } = useNews();
+
+    const showNews = id => {
+      router.push({
+        path: `/news/${id}`
+      });
+    }
+
+    const editNews = id => {
+      router.push({
+        path: `/news/edit/${id}`
+      });
+    }
     return {
-      newsList,
       loading,
       filter,
       fetchNews,
-      filteredList,
+      filteredNews,
       showNews,
+      editNews,
       deleteNews,
-      addNews
+      addNews,
+      news
     };
   }
 };
 </script>
+
+<style>
+.news {
+  text-align: center;
+}
+</style>

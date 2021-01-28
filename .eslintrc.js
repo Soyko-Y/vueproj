@@ -3,9 +3,19 @@ module.exports = {
   env: {
     node: true
   },
-  extends: ["plugin:vue/vue3-essential", "eslint:recommended", "@vue/prettier", "plugin:testing-library/vue"],
+  extends: [
+    "plugin:vue/vue3-essential",
+    "eslint:recommended",
+    "plugin:vue/vue3-recommended",
+    "plugin:vue/base",
+    "plugin:testing-library/vue"
+  ],
+  parser: "vue-eslint-parser",
   parserOptions: {
-    parser: "babel-eslint"
+    parser: "babel-eslint",
+    ecmaFeatures: {
+      jsx: true
+    }
   },
   rules: {
     "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
