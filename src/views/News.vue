@@ -1,6 +1,11 @@
 <template>
   <div class="news">
-    <AddNews :onSave="addNews" />
+    <button 
+      class="btn btn--primary btn--medium btn--save"
+      @click="addNews"
+    >
+      Add News
+    </button>
 
     <select v-model="filter">
       <option value="all">All</option>
@@ -22,7 +27,6 @@
 </template>
 
 <script>
-import AddNews from "@/components/AddNews";
 import NewsArticle from "@/components/NewsArticle";
 import Loader from "@/components/Loader";
 import { useNews } from "../compositions/news";
@@ -31,7 +35,6 @@ import { useRouter } from 'vue-router'
 export default {
   name: "News",
   components: {
-    AddNews,
     NewsArticle,
     Loader
   },
@@ -44,13 +47,24 @@ export default {
       fetchNews,
       filteredNews,
       deleteNews,
-      addNews,
+      updateNews,
       news,
     } = useNews();
 
     const showNews = id => {
+      let viewedNews = news.value.find(page => page.id === id);
+      if(!viewedNews.isViewed) {
+        viewedNews.isViewed = true;
+        updateNews(viewedNews);
+      }
       router.push({
         path: `/news/${id}`
+      });
+    }
+
+    const addNews = () => {
+      router.push({
+        path: '/news/add'
       });
     }
 
@@ -68,6 +82,7 @@ export default {
       editNews,
       deleteNews,
       addNews,
+      updateNews,
       news
     };
   }

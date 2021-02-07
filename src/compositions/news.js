@@ -34,7 +34,7 @@ export function useNews() {
     await client.delete(`${apiUrl}/news/${id}`);   
   };
 
-  const addNews = async page => {
+  const saveNews = async page => {
     news.value.unshift(page);
     await client.post(`${apiUrl}/news`, page);
   };
@@ -57,7 +57,7 @@ export function useNews() {
     fetchNews,
     filteredNews,
     deleteNews,
-    addNews,
+    saveNews,
     getNewsById,
     updateNews
   };
