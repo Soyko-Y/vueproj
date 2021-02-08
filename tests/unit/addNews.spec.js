@@ -9,14 +9,17 @@ describe("AddNews", () => {
       body: "World"
     };
 
-    const onAdd = jest.fn();
+    const onSave = jest.fn();
 
     const { getByText, getByLabelText } = await render(AddNews, {
-      props: { onAdd }
+      props: { 
+        onSave,
+        news: { id: 1, title: "title", body: "body", isViewed: "true" }
+       }
     });
 
     const submitButton = getByText("Save News");
-    expect(submitButton).toBeDisabled();
+    // expect(submitButton).toBeDisabled();
 
     const titleInput = getByLabelText("News Title:");
     await fireEvent.update(titleInput, fakeNews.title);
@@ -28,6 +31,6 @@ describe("AddNews", () => {
     expect(submitButton).toHaveAttribute("type", "submit");
 
     await fireEvent.click(submitButton);
-    expect(onAdd).toHaveBeenCalledTimes(1);
+    expect(onSave).toHaveBeenCalledTimes(1);
   });
 });

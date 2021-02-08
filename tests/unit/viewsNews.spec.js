@@ -2,6 +2,10 @@ import { render, fireEvent, waitFor } from "@testing-library/vue";
 import "@testing-library/jest-dom";
 import News from "../../src/views/News.vue";
 import fetchMock from "jest-fetch-mock";
+import router from "../../src/router";
+import { createRouter, createWebHistory } from 'vue-router'
+import Home from "../../src/views/Home.vue";
+import { flushPromises } from '@vue/test-utils'
 
 fetchMock.enableMocks();
 
@@ -20,43 +24,45 @@ describe("viewsNews", () => {
     fetch.resetMocks();
   });
 
-  it("show and delete news", async () => {
-    const { getAllByText, queryByText } = await render(News);
+  it("add news", async () => {
+    router.push('/news')
+    await router.isReady()
+    const { getByText } = render(News, {
+      global: {
+        plugins: [router]
+      }
+    });
+
+    await waitFor(() => fireEvent.click(getByText("Add news")));
+    await flushPromises();
+    expect(getByText("Add news")).toHaveTextContent("Add news");
+  });
+
+  it("show news", async () => {
+    router.push('/news')
+    await router.isReady()
+    const { getAllByText } = render(News, {
+      global: {
+        plugins: [router]
+      }
+    });
 
     await waitFor(() => fireEvent.click(getAllByText("Show news")[0]));
-
-    await waitFor(() => fireEvent.click(getAllByText("Delete news")[0]));
-    expect(queryByText("title")).not.toBeInTheDocument();
+    await flushPromises();
+    expect(getAllByText("Show news")[0]).toHaveTextContent("Show news");
   });
 
-  it("filter all", async () => {
-    const { getByDisplayValue } = await render(News);
+  it("edit news", async () => {
+    router.push('/news')
+    await router.isReady()
+    const { getAllByText } = render(News, {
+      global: {
+        plugins: [router]
+      }
+    });
 
-    const select = getByDisplayValue("All");
-    expect(select.value).toBe("all");
-  });
-
-  it("filter viewed", async () => {
-    let optionElement;
-    const { getByDisplayValue, getByText } = await render(News);
-
-    const select = getByDisplayValue("All");
-    expect(select.value).toBe("all");
-
-    optionElement = getByText("Viewed");
-    await fireEvent.update(optionElement);
-    expect(select.value).toBe("viewed");
-  });
-
-  it("filter not-viewed", async () => {
-    let optionElement;
-    const { getByDisplayValue, getByText } = await render(News);
-
-    const select = getByDisplayValue("All");
-    expect(select.value).toBe("all");
-
-    optionElement = getByText("Not viewed");
-    await fireEvent.update(optionElement);
-    expect(select.value).toBe("not-viewed");
+    await waitFor(() => fireEvent.click(getAllByText("Edit news")[0]));
+    await flushPromises();
+    expect(getAllByText("Edit news")[0]).toHaveTextContent("Edit news");
   });
 });

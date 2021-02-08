@@ -4,7 +4,7 @@
       class="btn btn--primary btn--medium btn--save"
       @click="addNews"
     >
-      Add News
+      Add news
     </button>
 
     <select v-model="filter">
