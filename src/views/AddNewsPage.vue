@@ -10,7 +10,7 @@ import AddNews from "@/components/AddNews";
 import { useNews } from "../compositions/news";
 import { useRouter } from 'vue-router'
 export default {
-  name: "EditNewsPage",
+  name: "AddNewsPage",
   components: {
     AddNews,
   },
